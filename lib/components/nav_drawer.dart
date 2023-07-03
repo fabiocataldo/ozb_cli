@@ -24,8 +24,8 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Auth auth = Auth();
-    User? currentUser = auth.currentUser;
-    EditProfileModal editModal = const EditProfileModal();
+    // User? currentUser = auth.currentUser;
+    // EditProfileModal editModal = const EditProfileModal();
 
     return Drawer(
       child: ListView(
