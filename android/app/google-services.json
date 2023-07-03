@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "272318885943",
+    "project_id": "ozb-test",
+    "storage_bucket": "ozb-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272318885943:android:3f34af67ee5c1ebb4f0fb2",
+        "android_client_info": {
+          "package_name": "com.example.ozb_cli"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272318885943-572nsme8gqljkr2tj3uis7f82k3jttb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKl5tEpQzqJTj9e0E_AOqmRrTRMvI7zug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272318885943-572nsme8gqljkr2tj3uis7f82k3jttb2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "272318885943-1d3sh6061ppibdsukum4mh8tlunpdco4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.endtoend.ozb"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272318885943:android:30b976b5f07963c74f0fb2",
+        "android_client_info": {
+          "package_name": "com.example.ozb_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272318885943-572nsme8gqljkr2tj3uis7f82k3jttb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKl5tEpQzqJTj9e0E_AOqmRrTRMvI7zug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272318885943-572nsme8gqljkr2tj3uis7f82k3jttb2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "272318885943-1d3sh6061ppibdsukum4mh8tlunpdco4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.endtoend.ozb"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
