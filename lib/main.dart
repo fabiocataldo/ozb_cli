@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ozb_cli/components/cart_notification.dart';
 import 'package:ozb_cli/login/login_stream_check.dart';
 import 'package:ozb_cli/view_models/product_view_model.dart';
-import 'package:ozb_cli/views/edit_profile_modal.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 

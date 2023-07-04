@@ -41,6 +41,7 @@ class LoginScreenState extends State<LoginScreen> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+
       print('Usuário logado: ${userCredential.user?.email}');
     } on FirebaseAuthException catch (e) {
       setState(() {

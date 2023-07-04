@@ -51,7 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             ProductGridWidget(
                 productViewModel: productViewModel,
-                orientation: MediaQuery.of(context).orientation),
+                orientation: MediaQuery.of(context).orientation,
+                list: const []),
             const FavoriteScreen(),
           ],
         ),

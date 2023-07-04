@@ -5,13 +5,17 @@ import 'package:ozb_cli/components/product_box.dart';
 import 'package:ozb_cli/models/product_list_model.dart';
 import 'package:ozb_cli/utils/constants.dart';
 import 'package:ozb_cli/view_models/product_view_model.dart';
+import '../repo/api_status.dart';
+import '../repo/product_service.dart';
 
 class ProductGridWidget extends StatefulWidget {
   final ProductViewModel productViewModel;
   final Orientation orientation;
+  final List<ProductList> list;
 
   const ProductGridWidget({
     Key? key,
+    required this.list,
     required this.productViewModel,
     required this.orientation,
   }) : super(key: key);
@@ -22,8 +26,28 @@ class ProductGridWidget extends StatefulWidget {
 
 class _ProductGridWidgetState extends State<ProductGridWidget> {
   List<ProductList> productList = [];
-  // String selectedCategory = 'ALL';
+  List<ProductList> productListFilter = [];
   int gridCrossAxisCount = 2;
+
+  @override
+  initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _getInfo());
+  }
+
+  Future<List<ProductList>> _getInfo() async {
+    var response = await ProductService.getProducts();
+
+    if (response is Success) {
+      productList = response.response as List<ProductList>;
+      productListFilter = productList;
+    }
+
+    setState(() {
+      productList;
+    });
+    return productList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +61,6 @@ class _ProductGridWidgetState extends State<ProductGridWidget> {
     } else {
       childAspectRatio = 1.4;
     }
-
-    productList = widget.productViewModel.productListModel;
 
     return Column(
       children: [
@@ -54,20 +76,21 @@ class _ProductGridWidgetState extends State<ProductGridWidget> {
               Category.WOMENS_CLOTHING.name,
             ],
             onFilterSelected: (String filter) {
-              // List<ProductList> filteredList = [];
+              List<ProductList> filteredList = [];
 
-              // if (filter == 'ALL') {
-              //   filteredList = productList.toList();
-              // } else {
-              //   filteredList = productList
-              //       .where((product) => product.category.name == filter)
-              //       .toList();
-              // }
+              productList = productListFilter;
 
-              // setState(() {
-              //   productList = filteredList;
-              //   print(productList);
-              // });
+              if (filter == 'ALL') {
+                filteredList = productList.toList();
+              } else {
+                filteredList = productList
+                    .where((product) => product.category.name == filter)
+                    .toList();
+              }
+
+              setState(() {
+                productList = filteredList;
+              });
             },
           ),
         ),
