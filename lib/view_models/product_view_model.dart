@@ -44,4 +44,22 @@ class ProductViewModel extends ChangeNotifier {
 
     setloading(false);
   }
+
+  // List<String> favoriteProducts = [];
+
+  // void addFavorite(String title) {
+  //   if (!favoriteProducts.contains(title)) {
+  //     favoriteProducts.add(title);
+  //   }
+  // }
+
+  // void removeFavorite(String title) {
+  //   favoriteProducts.remove(title);
+  // }
+
+  // List<ProductList> getFavoriteProducts() {
+  //   return _productListModel
+  //       .where((product) => favoriteProducts.contains(product.title))
+  //       .toList();
+  // }
 }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ozb_cli/login/auth.dart';
+import 'package:ozb_cli/login/login_screen.dart';
 import 'package:ozb_cli/utils/constants.dart';
 import 'package:ozb_cli/views/edit_profile_modal.dart';
 
@@ -24,31 +24,20 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Auth auth = Auth();
-    // User? currentUser = auth.currentUser;
-    // EditProfileModal editModal = const EditProfileModal();
+    double drawerHeaderHeight = MediaQuery.of(context).size.height * 0.4;
 
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const SizedBox(
-            height: 300,
-            child: DrawerHeader(
+          SizedBox(
+            height: drawerHeaderHeight,
+            child: const DrawerHeader(
               decoration: BoxDecoration(
                 color: AppColors.primaryColor,
               ),
               child: EditProfileModal(),
             ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.edit),
-            title: const Text('Edit Profile'),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(Icons.lock),
-            title: const Text('Change Password'),
-            onTap: () {},
           ),
           const ListTile(
             title: Text(''),
@@ -59,6 +48,10 @@ class NavDrawer extends StatelessWidget {
             title: const Text('Logout'),
             onTap: () {
               auth.signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
+              );
             },
           ),
         ],

@@ -7,6 +7,7 @@ import 'package:ozb_cli/components/textfield_custom.dart';
 import 'package:ozb_cli/login/user_register.dart';
 import 'package:ozb_cli/utils/constants.dart';
 import 'package:flutter/services.dart';
+import 'package:ozb_cli/views/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -37,17 +38,24 @@ class LoginScreenState extends State<LoginScreen> {
     });
 
     try {
+      // ignore: unused_local_variable
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
 
-      print('Usuário logado: ${userCredential.user?.email}');
+      // print('User logged: ${userCredential.user?.email}');
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      }
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
       });
-      print('Erro de login: ${e.message}');
+      // print('Login error: ${e.message}');
       _showSnackBar(errorMessage!);
     }
   }
@@ -75,113 +83,121 @@ class LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       key: _scaffoldKey,
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 25,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 20, 8),
-              child: SizedBox(
-                width: 180,
-                height: 180,
-                child: Image.asset(
-                  'assets/images/logo.png',
-                ),
-              ),
-            ),
-            const Center(
-              child: Text(
-                textAlign: TextAlign.center,
-                'Welcome to Ozb Shop',
-                style: TextStyle(
-                  height: 1.1,
-                  letterSpacing: 1,
-                  fontSize: 52,
-                  color: AppColors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            const Center(
-              child: Text(
-                'The best shop, fast and easy. Let\'s get started!',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: AppColors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 80,
-            ),
-            TextfieldCustom(
-                controller: _emailController, label: 'Email', obscure: false),
-            const SizedBox(height: 20),
-            TextfieldCustom(
-                controller: _passwordController,
-                label: 'Password',
-                obscure: true),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
               children: [
-                InkWell(
-                  onTap: () {
-                    _showResetPasswordDialog(context);
-                  },
-                  child: const Text(
-                    'Forgot Password?',
+                const SizedBox(
+                  height: 25,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 8, 20, 8),
+                  child: SizedBox(
+                    width: 180,
+                    height: 180,
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                    ),
+                  ),
+                ),
+                const Center(
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    'Welcome to Ozb Shop',
                     style: TextStyle(
-                      fontSize: 18,
-                      color: AppColors.modalColor,
+                      height: 1.1,
+                      letterSpacing: 1,
+                      fontSize: 52,
+                      color: AppColors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                const Center(
+                  child: Text(
+                    'The best shop, fast and easy. Let\'s get started!',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppColors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 80,
+                ),
+                TextfieldCustom(
+                    controller: _emailController,
+                    label: 'Email',
+                    obscure: false),
+                const SizedBox(height: 20),
+                TextfieldCustom(
+                    controller: _passwordController,
+                    label: 'Password',
+                    obscure: true),
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        _showResetPasswordDialog(context);
+                      },
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: AppColors.modalColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                const Spacer(),
+                CustomButton(text: 'Login', function: _login),
+                const Spacer(),
+                RichText(
+                  text: TextSpan(
+                    text: 'Don\'t have an account? ',
+                    style: const TextStyle(color: AppColors.grey, fontSize: 18),
+                    children: [
+                      TextSpan(
+                        text: 'Register',
+                        style: const TextStyle(
+                          color: AppColors.modalColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignUpScreen()),
+                            );
+                          },
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
                 ),
               ],
             ),
-            const SizedBox(
-              height: 25,
-            ),
-            const Spacer(),
-            CustomButton(text: 'Login', function: _login),
-            const Spacer(),
-            RichText(
-              text: TextSpan(
-                text: 'Don\'t have an account? ',
-                style: const TextStyle(color: AppColors.grey, fontSize: 18),
-                children: [
-                  TextSpan(
-                    text: 'Register',
-                    style: const TextStyle(
-                      color: AppColors.modalColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpScreen()),
-                        );
-                      },
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-          ],
+          ),
         ),
       ),
     );

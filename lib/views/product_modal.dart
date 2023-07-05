@@ -1,4 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:ozb_cli/components/add_bag_button.dart';
@@ -29,7 +30,74 @@ class ProductModal extends StatefulWidget {
 }
 
 class _ProductModalState extends State<ProductModal> {
+  @override
+  void initState() {
+    checkFavoriteStatus();
+    super.initState();
+  }
+
   bool isFavorite = false;
+  // bool isFavoriteFromFirebase = false;
+
+  Future<void> checkFavoriteStatus() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final CollectionReference favoritesCollection = FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection('favorites');
+
+      final QuerySnapshot snapshot = await favoritesCollection
+          .where('title', isEqualTo: widget.title)
+          .get();
+
+      setState(() {
+        isFavorite = snapshot.docs.isNotEmpty;
+      });
+    }
+  }
+
+  void saveFavoriteProduct() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final CollectionReference favoritesCollection = FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection('favorites');
+
+      final QuerySnapshot snapshot = await favoritesCollection
+          .where('title', isEqualTo: widget.title)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        await favoritesCollection.add({
+          'networkImage': widget.networkImage,
+          'title': widget.title,
+          'description': widget.description,
+          'price': widget.price,
+          'rating': widget.rating,
+          'reviews': widget.reviews,
+        });
+      }
+    }
+  }
+
+  void deleteFavoriteProduct(String title) async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final CollectionReference favoritesCollection = FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection('favorites');
+
+      final QuerySnapshot snapshot =
+          await favoritesCollection.where('title', isEqualTo: title).get();
+
+      for (final DocumentSnapshot doc in snapshot.docs) {
+        await doc.reference.delete();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +140,13 @@ class _ProductModalState extends State<ProductModal> {
                   onPressed: () {
                     setState(() {
                       isFavorite = !isFavorite;
+                      if (isFavorite) {
+                        // Adicionar o produto à lista de favoritos no Firebase
+                        saveFavoriteProduct();
+                      } else {
+                        // Remover o produto da lista de favoritos no Firebase
+                        deleteFavoriteProduct(widget.title);
+                      }
                     });
                   },
                   icon: Icon(

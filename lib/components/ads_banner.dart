@@ -12,8 +12,6 @@ class AdsBanner extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              // width: 350,
-              // height: 150,
               decoration: ShapeDecoration(
                 color: AppColors.modalColor,
                 shape: RoundedRectangleBorder(

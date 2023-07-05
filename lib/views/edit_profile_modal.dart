@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ozb_cli/login/auth.dart';
 import 'package:firebase_storage/firebase_storage.dart'
     show FirebaseStorage, Reference, UploadTask;
+import 'package:ozb_cli/utils/constants.dart';
 
 class EditProfileModal extends StatefulWidget {
   const EditProfileModal({Key? key}) : super(key: key);
@@ -75,7 +76,7 @@ class EditProfileModalState extends State<EditProfileModal> {
         _emailController.text = email;
       });
     } catch (e) {
-      print('Error updating user profile: $e');
+      // print('Error updating user profile: $e');
     }
   }
 
@@ -93,7 +94,7 @@ class EditProfileModalState extends State<EditProfileModal> {
 
       return imageUrl;
     } catch (e) {
-      print('Error uploading image to storage: $e');
+      // print('Error uploading image to storage: $e');
       return '';
     }
   }
@@ -128,8 +129,6 @@ class EditProfileModalState extends State<EditProfileModal> {
                 onPressed: () => _pickImage(ImageSource.gallery),
                 child: const Text('Select Image'),
               ),
-              if (_imageFile != null)
-                Image.file(_imageFile!, width: 50, height: 50),
             ],
           ),
           actions: [
@@ -168,27 +167,34 @@ class EditProfileModalState extends State<EditProfileModal> {
                       ? NetworkImage(_imageUrl!)
                       : const AssetImage('assets/avatar.png'))
                   as ImageProvider<Object>,
-          radius: 50,
+          radius: 75,
         ),
         const SizedBox(height: 8),
         Text(
           _nameController.text,
           style: const TextStyle(
-            color: Colors.black,
+            color: AppColors.white,
             fontSize: 18,
           ),
         ),
         Text(
           _emailController.text,
           style: const TextStyle(
-            color: Colors.black,
+            color: AppColors.white,
             fontSize: 14,
           ),
         ),
-        ElevatedButton(
-          onPressed: _showEditDialog,
-          child: const Text('Edit Profile'),
-        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(
+                onPressed: _showEditDialog,
+                icon: const Icon(
+                  Icons.edit,
+                  color: AppColors.white,
+                )),
+          ],
+        )
       ],
     );
   }

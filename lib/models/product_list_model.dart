@@ -7,7 +7,7 @@ String productListToJson(List<ProductList> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ProductList {
-  int id;
+  int? id;
   String title;
   double price;
   String description;
@@ -46,6 +46,7 @@ class ProductList {
       };
 }
 
+// ignore: constant_identifier_names
 enum Category { MENS_CLOTHING, JEWELERY, ELECTRONICS, WOMENS_CLOTHING }
 
 final categoryValues = EnumValues({

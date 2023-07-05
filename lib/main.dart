@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const LoginCheck(),
-        // home: const EditProfileModal(),
       ),
     );
   }
