@@ -125,6 +125,9 @@ class EditProfileModalState extends State<EditProfileModal> {
                 controller: _emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
               ),
+              const SizedBox(
+                height: 15,
+              ),
               ElevatedButton(
                 onPressed: () => _pickImage(ImageSource.gallery),
                 child: const Text('Select Image'),
@@ -167,9 +170,9 @@ class EditProfileModalState extends State<EditProfileModal> {
                       ? NetworkImage(_imageUrl!)
                       : const AssetImage('assets/avatar.png'))
                   as ImageProvider<Object>,
-          radius: 75,
+          radius: 55,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 15),
         Text(
           _nameController.text,
           style: const TextStyle(
@@ -194,7 +197,7 @@ class EditProfileModalState extends State<EditProfileModal> {
                   color: AppColors.white,
                 )),
           ],
-        )
+        ),
       ],
     );
   }

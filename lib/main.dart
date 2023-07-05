@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CartNotifier()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Ozb Test',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

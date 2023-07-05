@@ -23,7 +23,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       currentIndex: widget.currentIndex,
       onTap: widget.onTap,
       unselectedItemColor: AppColors.grey,
-      selectedItemColor: AppColors.primaryColor,
+      selectedItemColor: AppColors.modalColor,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

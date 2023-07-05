@@ -24,7 +24,7 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Auth auth = Auth();
-    double drawerHeaderHeight = MediaQuery.of(context).size.height * 0.4;
+    double drawerHeaderHeight = MediaQuery.of(context).size.height * 0.35;
 
     return Drawer(
       child: ListView(
