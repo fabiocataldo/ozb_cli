@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ozb_cli/login/auth.dart';
-import 'package:ozb_cli/login/login_screen.dart';
+import 'package:ozb_cli/views/login_screen.dart';
 import 'package:ozb_cli/utils/constants.dart';
 import 'package:ozb_cli/views/edit_profile_modal.dart';
 

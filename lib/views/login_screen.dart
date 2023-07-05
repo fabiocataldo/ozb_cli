@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ozb_cli/components/custom_button.dart';
 import 'package:ozb_cli/components/textfield_custom.dart';
-import 'package:ozb_cli/login/user_register.dart';
+import 'package:ozb_cli/views/user_register.dart';
 import 'package:ozb_cli/utils/constants.dart';
 import 'package:flutter/services.dart';
 import 'package:ozb_cli/views/home_screen.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ozb_cli/login/auth.dart';
-import 'package:ozb_cli/login/login_screen.dart';
+import 'package:ozb_cli/views/login_screen.dart';
 import 'package:ozb_cli/views/home_screen.dart';
 
 class LoginCheck extends StatefulWidget {
