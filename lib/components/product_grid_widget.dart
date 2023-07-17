@@ -38,10 +38,12 @@ class _ProductGridWidgetState extends State<ProductGridWidget> {
   Future<List<ProductList>> _getInfo() async {
     var response = await ProductService.getProducts();
 
-    if (response is Success) {
-      productList = response.response as List<ProductList>;
-      productListFilter = productList;
-    }
+    productList = response;
+
+    // if (response is Success) {
+    //   productList = response;
+    //   productListFilter = productList;
+    // }
 
     setState(() {
       productList;
@@ -65,35 +67,35 @@ class _ProductGridWidgetState extends State<ProductGridWidget> {
     return Column(
       children: [
         const AdsBanner(),
-        SizedBox(
-          height: 50,
-          child: FilterCarousel(
-            filterOptions: [
-              'ALL',
-              Category.ELECTRONICS.name,
-              Category.JEWELERY.name,
-              Category.MENS_CLOTHING.name,
-              Category.WOMENS_CLOTHING.name,
-            ],
-            onFilterSelected: (String filter) {
-              List<ProductList> filteredList = [];
+        // SizedBox(
+        //   height: 50,
+        //   child: FilterCarousel(
+        //     filterOptions: [
+        //       'ALL',
+        //       Category.ELECTRONICS.name,
+        //       Category.JEWELERY.name,
+        //       Category.MENS_CLOTHING.name,
+        //       Category.WOMENS_CLOTHING.name,
+        //     ],
+        //     onFilterSelected: (String filter) {
+        //       List<ProductList> filteredList = [];
 
-              productList = productListFilter;
+        //       productList = productListFilter;
 
-              if (filter == 'ALL') {
-                filteredList = productList.toList();
-              } else {
-                filteredList = productList
-                    .where((product) => product.category.name == filter)
-                    .toList();
-              }
+        //       if (filter == 'ALL') {
+        //         filteredList = productList.toList();
+        //       } else {
+        //         filteredList = productList
+        //             .where((product) => product.category.name == filter)
+        //             .toList();
+        //       }
 
-              setState(() {
-                productList = filteredList;
-              });
-            },
-          ),
-        ),
+        //       setState(() {
+        //         productList = filteredList;
+        //       });
+        //     },
+        //   ),
+        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -128,12 +130,12 @@ class _ProductGridWidgetState extends State<ProductGridWidget> {
             ),
             itemBuilder: (context, index) {
               return ProductBox(
-                networkImage: productList[index].image,
-                title: productList[index].title,
-                description: productList[index].description,
-                price: productList[index].price,
-                rating: productList[index].rating.rate,
-                reviews: productList[index].rating.count,
+                networkImage: 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg',
+                title: '',
+                description: 'productList[index].description',
+                price: 3900,
+                rating: 10,
+                reviews: 20,
               );
             },
           ),

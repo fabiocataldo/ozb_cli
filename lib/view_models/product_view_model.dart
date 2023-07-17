@@ -34,7 +34,7 @@ class ProductViewModel extends ChangeNotifier {
     var response = await ProductService.getProducts();
 
     if (response is Success) {
-      setProductListModel(response.response as List<ProductList>);
+      setProductListModel(response);
     }
     // if(response is Failure){
     //   ProductError productError = ProductError(code: response.code, message: response.errorResponse);
